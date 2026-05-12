@@ -6,7 +6,7 @@
 
 ## 效果
 
-![example](articles/2026-05-11-ai-video-cost/article.html)
+![example](articles/2026-05-10-shen-gun-gan/article.html)
 
 - **衬线标题 + 非衬线正文 + 等宽元数据**：三层字体系统，视觉层次分明
 - **版面有攻击性**：大号数字序号、左对齐分割线、直角边框、黑底引用框
@@ -141,9 +141,7 @@ AD-skills/
 │   ├── themes.md                ← 5 套预设主题色
 │   └── checklist.md             ← P0/P1/P2 质量检查清单
 └── articles/                    ← 示例输出
-    ├── 2026-05-11-ai-video-cost/
-    ├── 2026-05-10-shen-gun-gan/
-    └── 2026-05-06-agent-journey/
+    └── 2026-05-10-shen-gun-gan/
 ```
 
 ## 致谢
