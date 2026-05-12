@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>我在火辣的四川吃着火锅，决定要走</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Playfair+Display:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0a0a0b;
+      --paper: #f1efea;
+      --muted: #6b635a;
+      --line: rgba(10,10,11,0.1);
+      --max: 680px;
+      --serif: "Noto Serif SC", "Songti SC", "STSong", serif;
+      --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      --mono: "IBM Plex Mono", "SF Mono", Menlo, monospace;
+      --display: "Playfair Display", "Noto Serif SC", serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: #e8e3dc; }
+    body {
+      color: var(--ink);
+      font-family: var(--sans);
+      background:
+        linear-gradient(180deg, #f1efea 0%, #ece7df 100%);
+      -webkit-font-smoothing: antialiased;
+    }
+    .sheet {
+      max-width: 920px;
+      margin: 20px auto;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      position: relative;
+    }
+    .sheet-frame {
+      position: absolute;
+      inset: 14px;
+      border: 1px solid rgba(10,10,11,0.04);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Chrome ── */
+    .chrome {
+      padding: 28px 48px 20px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .chrome-left {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .chrome-right {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── Article ── */
+    .article {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 48px 24px 72px;
+    }
+
+    /* ── Kicker ── */
+    .kicker {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    /* ── Hero Title ── */
+    .hero-title {
+      font-family: var(--serif);
+      font-weight: 900;
+      font-size: clamp(32px, 6vw, 52px);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: 28px;
+    }
+
+    /* ── Summary ── */
+    .summary {
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.86;
+      color: var(--muted);
+      padding-bottom: 24px;
+      margin-bottom: 36px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    /* ── Body ── */
+    .body p {
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 2;
+      color: rgba(10,10,11,0.88);
+      margin-bottom: 20px;
+    }
+
+    /* ── Subhead ── */
+    .subhead {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(22px, 3.5vw, 30px);
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin: 48px 0 24px;
+      padding-top: 32px;
+      border-top: 1px solid var(--line);
+    }
+
+    /* ── Big Number ── */
+    .big-num {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(56px, 10vw, 96px);
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      margin: 48px 0 8px;
+    }
+    .big-num-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    /* ── Quote ── */
+    .quote {
+      font-family: var(--serif);
+      font-size: clamp(20px, 3vw, 26px);
+      line-height: 1.6;
+      color: var(--ink);
+      padding: 32px 0;
+      margin: 36px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+    }
+
+    /* ── Pull Quote (截图金句) ── */
+    .pull-quote {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(22px, 3.2vw, 28px);
+      line-height: 1.5;
+      color: var(--ink);
+      padding: 36px 32px;
+      margin: 40px 0;
+      border-left: 3px solid var(--ink);
+      background: rgba(10,10,11,0.02);
+    }
+
+    /* ── Timeline ── */
+    .timeline {
+      margin: 40px 0;
+      padding: 0;
+    }
+    .timeline-item {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 28px;
+      align-items: flex-start;
+    }
+    .timeline-date {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      min-width: 80px;
+      padding-top: 4px;
+      text-transform: uppercase;
+    }
+    .timeline-text {
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.8;
+      color: rgba(10,10,11,0.82);
+      flex: 1;
+      padding-left: 20px;
+      border-left: 1px solid var(--line);
+    }
+
+    /* ── List ── */
+    .list-block {
+      margin: 24px 0;
+      padding: 0;
+      list-style: none;
+    }
+    .list-block li {
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 2;
+      color: rgba(10,10,11,0.88);
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+    .list-block li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+
+    /* ── Three Questions ── */
+    .questions {
+      text-align: center;
+      padding: 48px 0;
+      margin: 40px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .questions p {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(24px, 4vw, 36px);
+      line-height: 1.5;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+
+    /* ── Ghost ── */
+    .ghost {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: clamp(80px, 18vw, 180px);
+      line-height: 0.85;
+      letter-spacing: -0.06em;
+      color: rgba(10,10,11,0.04);
+      text-align: center;
+      margin: 40px 0;
+      user-select: none;
+    }
+
+    /* ── Vision Block ── */
+    .vision {
+      margin: 48px 0;
+      padding: 32px;
+      border: 1px solid var(--line);
+    }
+    .vision-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .vision p {
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.9;
+      color: rgba(10,10,11,0.92);
+      margin-bottom: 16px;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 48px 0;
+    }
+
+    /* ── Closing ── */
+    .closing {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(20px, 3vw, 26px);
+      line-height: 1.5;
+      color: var(--ink);
+      text-align: center;
+      padding: 48px 0 32px;
+      border-top: 1px solid var(--line);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      padding: 24px 48px 28px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-left {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .footer-right {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 720px) {
+      .sheet { margin: 8px; }
+      .chrome, .footer { padding-left: 24px; padding-right: 24px; }
+      .article { padding: 36px 18px 56px; }
+      .timeline-item { flex-direction: column; gap: 8px; }
+      .timeline-date { min-width: auto; }
+      .timeline-text { padding-left: 16px; }
+      .pull-quote { padding: 28px 24px; }
+      .vision { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+    <div class="sheet-frame"></div>
+
+    <!-- Chrome -->
+    <div class="chrome">
+      <span class="chrome-left">AIAD / Personal Archive</span>
+      <span class="chrome-right">2026.05.06</span>
+    </div>
+
+    <!-- Article -->
+    <main class="article">
+
+      <!-- Cover Section -->
+      <div class="kicker">origin story / 个人叙事</div>
+      <h1 class="hero-title">我在火辣的<br>四川吃着火锅，<br>决定要走</h1>
+      <p class="summary">一个冰箱制造业的人，在出差途中看到 SDXL 出图和 Animatediff 出视频的那一刻，意识到这是一个疯狂且无限进步的行业。带着三万块钱，边学边赚，花完就找工作。一年后，决定为 agent 做长期服务。</p>
+
+      <!-- Opening -->
+      <div class="body">
+        <p>在一个月前决定服务 agent 的大方向后，继续缩圈。</p>
+        <p>未来的 AI 影视可以分为两大类。一类往奢侈品的概念走，主打概念和宏大。另一类，随着所谓的"批发"工业的大规模发展，未来有且一定会出现一个粉丝定制化的产业。</p>
+        <p>这个将会是服务 agent 的内容方向。</p>
+      </div>
+
+      <!-- Ghost -->
+      <div class="ghost">2024</div>
+
+      <!-- The Moment -->
+      <div class="subhead">那个契机</div>
+
+      <div class="body">
+        <p>回忆 2024 年的 6 月份。那年的 3 月份刚接触到 AI，直接就想离职，投入到 AI 的大军中。</p>
+        <p>当时就是一个契机。本来就是在学着用平板画画，画着画着，有人在骂 AI。当时就想着这个玩意这么牛逼，看了一下原理后觉得可以应用到 AI 流体仿真上面，可以快速出流体图，然后就可以玩了。</p>
+        <p>抱着这个心态学了一个月，恰逢和当时冰箱公司的一个高管一起出差，一起边看自己喜欢的冰箱，一边浏览着各种 AI 资讯。</p>
+        <p>高管人很好，出差的时候对我很照顾。我们在这个过程中一边聊喜欢的冰箱，然后在聊的过程中，讨论冰箱的市场。</p>
+      </div>
+
+      <!-- The Realization -->
+      <div class="big-num">SDXL</div>
+      <div class="big-num-label">+ Animatediff / The Realization</div>
+
+      <div class="body">
+        <p>然后我看到了 SDXL 出来的图片和 Animatediff 出来的视频。</p>
+        <p>我一下子意识到，这个行业是一个疯狂且无限进步的行业，它会比互联网更具生命力和破坏力。</p>
+      </div>
+
+      <div class="pull-quote">
+        这是真正意义上的科技革命。<br>
+        人类可以把自己的经验存起来，<br>
+        不是在人脑里面，笔记里面，<br>
+        而是另外的模型里面。
+      </div>
+
+      <div class="body">
+        <p>尽管这时候 ChatGPT 已经出来很久了，大语言模型也出来很久了，而我也聊过一次两次，但是发现他对我这种过于专业的人一点用没有。然后在抛弃了一年的时间后发现，这玩意直接突破了我的认知。</p>
+        <p>我当时就以为跟仿真一样，是用网格和二分法跑出来。结果告诉我概率学可以搞成这个样子。</p>
+      </div>
+
+      <div class="quote">然后我在当时火辣的四川，吃着火锅，就决定要走。</div>
+
+      <!-- Timeline -->
+      <div class="subhead">三万块钱的赌注</div>
+
+      <div class="body">
+        <p>后面就没什么话说了。</p>
+        <p>我给了自己三万块钱的定额，边学习边赚，只要花完就找相关工作。</p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="timeline-date">2024 Q3</span>
+          <span class="timeline-text">在各种群里面接单，认识了一些有趣的人，到现在还在联系。但是，我这个人不喜欢赚钱，我更喜欢探索。一个新事物的出现，你肯定是要边赚钱边玩它。</span>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-date">2024 Q4</span>
+          <span class="timeline-text">放弃了接单，开始找各种视频学习。把工作室从中山挪到广州，进了些圈子，了解到 waytoAGI，开始白嫖大佬们的智慧。买了课，进入野神殿。4000 块真的值，边回血边学习。</span>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-date">2024 冬</span>
+          <span class="timeline-text">第一次接触可灵 1.0，接触到精品 AI 剧，和一群小伙伴在深夜里面做共创。遇见了 AI 传拓写的伙伴（铭记）和大师兄，把自己的履历和学习飞轮再一次提高。</span>
+        </div>
+      </div>
+
+      <!-- Struggle -->
+      <div class="subhead">两个也不会</div>
+
+      <div class="body">
+        <p>然后就是痛苦的十二月和一月份。</p>
+        <p>我记得当时自己有两个也不会。</p>
+        <p>一是那种审美上欠缺，这个不是很沮丧，因为这个我知道我可以补齐，而且后续证明了我是可以补齐的，这个不是提示词工程学习那么简单。</p>
+        <p>二是确定性的东西不会，就是 AI 时代太快了，我知道我所有学习的东西都不是让我站到最后的（现在回头看，可能 AI 的资产可以让我站到最后，只是当时的我不认可）。今天学的绘图提示词技巧，第二天模型迭代，没了。刚学会用 coze 做完一个流程，一个模型迭代或者 agent 迭代直接丢失原本的价值。</p>
+      </div>
+
+      <!-- The Two Opportunities -->
+      <div class="big-num">2</div>
+      <div class="big-num-label">Absolute Opportunities / 两个绝对确定的机会</div>
+
+      <div class="body">
+        <p>这时候就出现了两个绝对确定的机会。</p>
+        <p>一个是 agent，一个是模型。</p>
+        <p>但是模型的机会，我在学习了一些基础知识后就放弃了，因为我发现我可能上车晚了，我对这个一点兴趣都没有。</p>
+      </div>
+
+      <div class="pull-quote">
+        如果把大模型比做水，<br>
+        我更喜欢用大模型生成出来的冰棍。
+      </div>
+
+      <!-- The Job -->
+      <div class="subhead">我是谁？我在哪？我要干什么？</div>
+
+      <div class="body">
+        <p>于是我在 2025 年 4 月份接受了现在这家公司的 offer。尽管那个月，因为大师兄和 AI 传拓工作室的发力，我现金流大幅度回正。这时候已经过去了一年了。</p>
+        <p>我还记得当时跟爸妈说清楚，AI 这条路子一定是对的方向，只是我还没有找到我的位置。</p>
+        <p>到了这个算力公司跟进 comfyui 之后，跟着做 AI 工具。今年复盘的时候发现，有两个点我因为沉浸在学习的过程中没有发现。</p>
+        <p>第一个是我的定位很奇怪，我到底是一个 PM 还是技术，这个在制造业是分的巨清楚，但是我不知道互联网是否也是这样的，后面问了，互联网就是这样的。（他们以为我是一个很强大的人，但是我的强大是有范围的，我知道我的范围在哪，但是我当时抱着空杯的心态去学习，怎么说呢？公司是亏的，我是赚的。）</p>
+        <p>第二个是我的项目总是被打断，我的无限画布视频制作项目在 8 月份开始做，但是我直接在 8 月底被打断了，然后就是我都不知道是什么的练手项目，然后卷入了各种医疗项目，完整跑完了一个项目，就没有技术人员和项目需求人员继续跟进了。（这种太奇怪了，但是后面发现其实还好，主要是我没有明确主线，只要明确主线任务，同期的几个 PM 都是成功的。）</p>
+      </div>
+
+      <div class="body">
+        <p>这两点不是在说公司不当人。</p>
+        <p>后面我观察同期的人，其实他们在同样的环境下，是获取阶段性成功的了，是我不清楚这里面到底应该是什么。</p>
+        <p>因为他们把整个商业逻辑和到底做什么都很清楚，而且很坚持，这个点很触动我，因为我在做冰箱制造业的时候，我只需要对制冷件和结构件是否了解，然后点对点突破就可以获取很大的成功了。</p>
+      </div>
+
+      <div class="body">
+        <p>那么我重新审视了一下。当时学习了很多东西，同时留下了最宝贵的东西，我在审视我自己，我到底是要做什么？</p>
+        <p>如果是学习的话，我知道了用 agent 是不错的，做 workflow 也可以。写代码，硬着头皮也行，但是关键是：</p>
+      </div>
+
+      <!-- Three Questions -->
+      <div class="questions">
+        <p>我是谁？</p>
+        <p>我在哪？</p>
+        <p>我要干什么？</p>
+      </div>
+
+      <div class="body">
+        <p>我是 AI 时代下的浮萍，我随着浪而来，现在有人把我弄到了岸边，想让我当起一棵大树，我没有抓住。</p>
+      </div>
+
+      <!-- Turning Point -->
+      <div class="subhead">OpenClaw 的信号</div>
+
+      <div class="body">
+        <p>我在今年年初思考的同时，在一月份就部署了 OpenClaw。我就知道了 OpenClaw 这种"本地豆包"绝对会冲击整个世界。</p>
+        <p>这个跟我那个做技术的同事观点截然相反。于是，我再一次证明了我的前瞻性，同时知道了我一定要为 agent 做长期服务。</p>
+        <p>于是就有了这个公众号。</p>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- Current State -->
+      <div class="subhead">缩圈</div>
+
+      <div class="body">
+        <p>我在探索了一个月，做了模型部署，搞了几个 agent 镜像后，感觉有点效果，但是我觉得不舒服，且效果不是很好，于是我决定缩圈。</p>
+        <p>我就做好我一直在做的东西。我给 agent 做一些内容，让 agent 传递给他背后的那个人。</p>
+        <p>那么我结合了我的经历，我觉得可以做一些好玩的，来服务我认为的 agent 终局。</p>
+      </div>
+
+      <ul class="list-block">
+        <li>简单的 ComfyUI workflow</li>
+        <li>最基础的漫剧制作</li>
+      </ul>
+
+      <!-- Vision -->
+      <div class="ghost">ENDGAME</div>
+
+      <div class="vision">
+        <div class="vision-label">Agent 终局 / The Endgame</div>
+        <p><strong>人生操作系统成为标配。</strong>每个人 AgentOS，或者像 ColOS 管理他的生活和工作。</p>
+        <p><strong>Agent 互联网。</strong>所有 agent 都可以实时交换各种信息，只要他需要。这种需要不只是来自人类。</p>
+      </div>
+
+      <!-- Closing -->
+      <div class="closing">
+        我是 AD。<br/>
+        我希望在 AI 的终局站着。
+      </div>
+
+      <!-- QR Code Card -->
+      <div style="text-align:center;margin:32px 0 0;">
+        <p style="font-size:14px;line-height:1.8;color:var(--muted);margin-bottom:20px;">如果你也在盯 agent 这条路，欢迎关注。</p>
+        <img src="/Users/aiad/Desktop/personalraise/personal.jpg" alt="AIAD 微信" style="max-width:320px;width:100%;height:auto;display:block;margin:0 auto;border:1px solid rgba(10,10,11,0.06);" />
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <div class="footer">
+      <span class="footer-left">AIAD</span>
+      <span class="footer-right">Personal Archive / 2026</span>
+    </div>
+
+  </div>
+</body>
+</html>

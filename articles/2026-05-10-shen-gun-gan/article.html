@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>神棍感</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Playfair+Display:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #2c1810;
+      --ink-secondary: #5c3a2e;
+      --ink-muted: #7a7680;
+      --paper: #f4efe6;
+      --paper-tint: #ebe4d8;
+      --accent: #8b2e3b;
+      --accent-warm: #b8614a;
+      --accent-gold: #c4a265;
+      --muted: #7a7680;
+      --line: rgba(44,24,16,0.10);
+      --max: 680px;
+      --serif: "Noto Serif SC", "Songti SC", "STSong", serif;
+      --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      --mono: "IBM Plex Mono", "SF Mono", Menlo, monospace;
+      --display: "Playfair Display", "Noto Serif SC", serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: #ebe4d8; }
+    body {
+      color: var(--ink);
+      font-family: var(--sans);
+      background:
+        linear-gradient(180deg, #f4efe6 0%, #ebe4d8 100%);
+      -webkit-font-smoothing: antialiased;
+    }
+    .sheet {
+      max-width: 920px;
+      margin: 20px auto;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      position: relative;
+    }
+    .sheet-frame {
+      position: absolute;
+      inset: 14px;
+      border: 1px solid rgba(44,24,16,0.05);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Chrome ── */
+    .chrome {
+      padding: 28px 48px 20px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .chrome-left {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .chrome-right {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── Article ── */
+    .article {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 48px 24px 72px;
+    }
+
+    /* ── Kicker ── */
+    .kicker {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 20px;
+    }
+
+    /* ── Hero Title ── */
+    .hero-title {
+      font-family: var(--serif);
+      font-weight: 900;
+      font-size: clamp(32px, 6vw, 52px);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: 28px;
+    }
+
+    /* ── Summary ── */
+    .summary {
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.86;
+      color: var(--ink-secondary);
+      padding-bottom: 24px;
+      margin-bottom: 36px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    /* ── Body ── */
+    .body p {
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 2;
+      color: rgba(44,24,16,0.85);
+      margin-bottom: 20px;
+    }
+
+    /* ── Subhead ── */
+    .subhead {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(22px, 3.5vw, 30px);
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      color: var(--ink-secondary);
+      margin: 48px 0 24px;
+      padding-top: 32px;
+      border-top: 1px solid var(--line);
+    }
+
+    /* ── Pull Quote ── */
+    .pull-quote {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(22px, 3.2vw, 28px);
+      line-height: 1.5;
+      color: var(--accent);
+      padding: 36px 32px;
+      margin: 40px 0;
+      border-left: 3px solid var(--accent);
+      background: rgba(139,46,59,0.04);
+    }
+
+    /* ── Timeline ── */
+    .timeline {
+      margin: 40px 0;
+      padding: 0;
+    }
+    .timeline-item {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 28px;
+      align-items: flex-start;
+    }
+    .timeline-date {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      color: var(--accent-warm);
+      min-width: 80px;
+      padding-top: 4px;
+      text-transform: uppercase;
+    }
+    .timeline-text {
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.8;
+      color: rgba(44,24,16,0.78);
+      flex: 1;
+      padding-left: 20px;
+      border-left: 1px solid var(--line);
+    }
+
+    /* ── Quote ── */
+    .quote {
+      font-family: var(--serif);
+      font-size: clamp(20px, 3vw, 26px);
+      line-height: 1.6;
+      color: var(--ink-secondary);
+      padding: 32px 0;
+      margin: 36px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+    }
+
+    /* ── Ghost ── */
+    .ghost {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: clamp(80px, 18vw, 180px);
+      line-height: 0.85;
+      letter-spacing: -0.06em;
+      color: rgba(184,97,74,0.08);
+      text-align: center;
+      margin: 40px 0;
+      user-select: none;
+    }
+
+    /* ── Vision Block ── */
+    .vision {
+      margin: 48px 0;
+      padding: 32px;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--accent-gold);
+    }
+    .vision-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 20px;
+    }
+    .vision p {
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.9;
+      color: var(--ink-secondary);
+      margin-bottom: 16px;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 48px 0;
+    }
+
+    /* ── Closing ── */
+    .closing {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(20px, 3vw, 26px);
+      line-height: 1.5;
+      color: var(--accent-warm);
+      text-align: center;
+      padding: 48px 0 32px;
+      border-top: 1px solid var(--line);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      padding: 24px 48px 28px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-left {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .footer-right {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 720px) {
+      .sheet { margin: 8px; }
+      .chrome, .footer { padding-left: 24px; padding-right: 24px; }
+      .article { padding: 36px 18px 56px; }
+      .timeline-item { flex-direction: column; gap: 8px; }
+      .timeline-date { min-width: auto; }
+      .timeline-text { padding-left: 16px; }
+      .pull-quote { padding: 28px 24px; }
+      .vision { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+    <div class="sheet-frame"></div>
+
+    <!-- Chrome -->
+    <div class="chrome">
+      <span class="chrome-left">AIAD / DAILY REFLECTION</span>
+      <span class="chrome-right">2026.05.10</span>
+    </div>
+
+    <!-- Article -->
+    <main class="article">
+
+      <!-- Cover Section -->
+      <div class="kicker">DAILY REFLECTION / 个人随笔</div>
+      <h1 class="hero-title">神棍感</h1>
+      <p class="summary">发了上一篇文章后，我收到了 4 个人的反馈。这 4 个人的需求点各不相同，但又都跟我有所共鸣。我有一种我是神棍的感觉。</p>
+
+      <!-- Opening -->
+      <div class="body">
+        <p>以下分别说明这 4 个人的来源，以及我从中得到的东西。</p>
+      </div>
+
+      <!-- Ghost -->
+      <div class="ghost">01</div>
+
+      <!-- 第一位：行业内战友 -->
+      <div class="subhead">行业内战友</div>
+
+      <div class="body">
+        <p>第一位是我之前认识的一起共创的小伙伴。从 2024 年 9 月份到现在，已经认识接近两年了。他一直在 AI 漫剧这个行业工作，现在已经搭建了一套完整且工业化的 AI 漫剧工作流体系。</p>
+        <p>聊天时我按照我的 human3.0 的反馈，抑制住了分享欲，一直在问他问题。聊着聊着，我发现我们有强烈的情感共鸣——我们都是非产品经理、非互联网行业出身的人，因为掌握了漫居工作流的 know-how，才进入这个行业，希望把东西做出来。区别是：<strong>他成功了，我没有</strong>。</p>
+        <p>而且他的位置已经做到行业比较前沿的水平，技术也很不错。但更让我触动的不是对他工作流的赞叹，而是情感上的共鸣。我体悟到为什么当初建立的友谊会这么长久——尽管有些小伙伴之间已经有些疏远，但我跟各自的关系都还不错，因为这种战友情很重要。</p>
+      </div>
+
+      <!-- Pull Quote -->
+      <div class="pull-quote">"这种战友情很重要，我体悟到为什么当初建立的友谊会这么长久。"</div>
+
+      <div class="body">
+        <p>他虽然没有解决我很多问题，但起码解决了一个：我很少体悟到的一种情感共鸣。这让我感觉自己像是个人了，而不是一台高速运转的机器。昨天晚上一直到凌晨 5 点都很兴奋，一直在回忆这件事。今天睡到中午 12 点，一整天都没怎么干活，但内心有一种力量涌现出来——因为我知道这件事情是对的，方向是正确的，不用每天拼命去干，慢慢前进就好。有这么多人陪伴，他们也有同样的痛苦和心酸，这种感觉很舒服。</p>
+        <p>这种情感共鸣是我以前做东西时前所未有的体悟。简而言之，我像是个人了。所谓 <strong>human 3.0</strong> 的 level——我的心智接近 level 3 的建筑师级别，但情感维度还在 1.5 左右。这是我们很多工科生在人生的探索中所缺失的东西，因此也很多工科生少了向上的力量。</p>
+      </div>
+
+      <!-- Ghost -->
+      <div class="ghost">02</div>
+
+      <!-- 第二位：同事 -->
+      <div class="subhead">同事</div>
+
+      <div class="body">
+        <p>第二位是我现在的同事。他的出发点不同，因为我们经常聊天，他的经历也比较丰富，所以可能像看小孩一样看着我。但他更关键的感受是：这篇文章是我手搓的，他觉得我很真诚，而不是一味灌 <strong>AI slop</strong>、做无意义的公众号文章和营销号，也没有得到跟社群的情感连接。</p>
+        <p>这个体悟也很不错。我做这个号的目的，一方面是我觉得自己所处的位置需要对外输出，顺便宣传一些东西；另一方面是想分享我对 AI 世界的认知、感悟、行业看法，以及连接我和我的朋友们。</p>
+      </div>
+
+      <!-- Ghost -->
+      <div class="ghost">03</div>
+
+      <!-- 第三位：陌生人粉丝 -->
+      <div class="subhead">陌生人粉丝</div>
+
+      <div class="body">
+        <p>第三位最开始我也不认识他，他也不认识我，属于粉丝吧。之前他就有关注我，然后跟我聊。我们之前加过微信，但一直没怎么聊天。</p>
+        <p>他看了我这篇文章后有一种体悟：我们很多人在 AI 时代都有这种感觉——明明学得很多了，但总是觉得很焦虑，同时很孤独，因为身边的人好像没有怎么去学过。这种孤独感，很多人认为是强者的标志，包括我以前也觉得要享受孤独。但这种想法其实很危险：如果没有很多人认同你的做法和想法，你很难做出坚决的决定，需要很强大的力量支撑。</p>
+      </div>
+
+      <!-- Vision Block -->
+      <div class="vision">
+        <div class="vision-label">AI 时代的孤独感</div>
+        <p>这让我想起了，为什么我们的立国之战的战士们可以义无反顾的前进，因为除了最崇高的理想之外，他们背后真的有家人需要他们保护。以前可能有父母、兄弟姐妹、同学在身边帮助，现在纯粹靠同事和个人，所以这种孤独感更明显了。</p>
+      </div>
+
+      <div class="body">
+        <p>但跟行业内人一交流共鸣，一下子就通透了。但是这个粉丝呢？从开始跟我聊天就是在询问，一直询问，但这个人给我的感觉是他在索取我的力量，在咨询我东西，所以不符合我上一篇文章说的那种共鸣。但我还是会继续接触，因为连接的目的就是帮助更多人，同时让更多人帮助我。</p>
+      </div>
+
+      <!-- Pull Quote -->
+      <div class="pull-quote">很多博主的闲聊都要收费——真的需要。一方面筛选用户，一方面帮助自己减少不必要的麻烦。</div>
+
+      <div class="body">
+        <p>这些人开始认为我是 AI 时代认知比较超前的人，但如果超前的认知没办法转化成实际效用，还是比较危险的。我现在就卡在这个点上。但幸运的是，公司给了我比较大的自由和机会来做这个事情。</p>
+      </div>
+
+      <!-- Ghost -->
+      <div class="ghost">04</div>
+
+      <!-- 第四位：旧友 -->
+      <div class="subhead">旧友</div>
+
+      <div class="body">
+        <p>第四位是我的一个朋友。他之前咨询我如何用 AI 检测被盗的自行车，我帮他开发了一个程序，帮他找了回来。通过这件事情建立了友谊。他是我大学室友介绍的，所以我没有跟他收咨询费。他觉得我这个事情看起来云里雾里的，但还是鼓励我。相当于一种精神支持。</p>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- 总结 -->
+      <div class="subhead">四种反馈</div>
+
+      <!-- Timeline -->
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="timeline-date">01</span>
+          <span class="timeline-text">行业战友的感同身受</span>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-date">02</span>
+          <span class="timeline-text">同事对真诚的认可</span>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-date">03</span>
+          <span class="timeline-text">陌生粉丝的共鸣</span>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-date">04</span>
+          <span class="timeline-text">旧友的鼓励</span>
+        </div>
+      </div>
+
+      <!-- Ghost -->
+      <div class="ghost">神棍</div>
+
+      <!-- 为什么感觉像神棍 -->
+      <div class="subhead">为什么感觉像神棍</div>
+
+      <div class="body">
+        <p>其实，我是潮汕人，小时候有各种祭拜神明的宗教行为和宗族活动。我个人从小就不喜欢，感觉很奇怪，但现在大概能理解——他们也是在寻求一种支撑自己面对艰难生活活下去的力量。</p>
+      </div>
+
+      <!-- Quote -->
+      <div class="quote">现在我莫名其妙地从各种类型的朋友中获取能量，<br>同时又成为他们的能量来源，<br>这让我有一种神棍的感觉。</div>
+
+      <!-- Closing -->
+      <div class="closing">边走边看吧，这又是一个新的命题。<br><br>一个有趣的命题。</div>
+
+    </main>
+
+    <!-- Footer -->
+    <div class="footer">
+      <span class="footer-left">AIAD / 2026</span>
+      <span class="footer-right">神棍感</span>
+    </div>
+  </div>
+</body>
+</html>
