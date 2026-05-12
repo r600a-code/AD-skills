@@ -19,7 +19,7 @@
 ### 方式一：一行命令（推荐）
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/AD-skills.git ~/.claude/skills/AD-skills
+git clone https://github.com/r600a-code/AD-skills.git ~/.claude/skills/AD-skills
 ```
 
 ### 方式二：手动安装
@@ -29,7 +29,7 @@ git clone https://github.com/YOUR_USERNAME/AD-skills.git ~/.claude/skills/AD-ski
 mkdir -p ~/.claude/skills/
 
 # 2. 克隆仓库
-git clone https://github.com/YOUR_USERNAME/AD-skills.git ~/.claude/skills/AD-skills
+git clone https://github.com/r600a-code/AD-skills.git ~/.claude/skills/AD-skills
 
 # 3. 验证
 ls ~/.claude/skills/AD-skills/
