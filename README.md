@@ -152,6 +152,11 @@ AD-skills/
 
 感谢歸藏的开源贡献。
 
+## 联系方式
+
+- 微信：`wwwr600a`
+- Twitter/X：[@ADfunAI](https://x.com/ADfunAI)
+
 ## 许可证
 
 [MIT](LICENSE)
